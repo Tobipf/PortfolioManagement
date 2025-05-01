@@ -1,5 +1,8 @@
+import pandas as pd
+
+
 class Asset:
-    def __init__(self, ticker, asset_class, price_time_series_df):
+    def __init__(self, ticker: str, asset_class: str, price_time_series_df: pd.DataFrame):
         self.ticker = ticker
         self.asset_class = asset_class
         self.price_time_series_df = price_time_series_df
@@ -11,16 +14,16 @@ class Asset:
         self.calculate_mean_return()
         self.calculate_return_stdev()
 
-    def set_price_time_series(self, time_series_df):
+    def set_price_time_series(self, time_series_df: pd.DataFrame) -> None:
         self.price_time_series_df = time_series_df
 
-    def get_price_time_series(self):
+    def get_price_time_series(self) -> pd.DataFrame:
         return self.price_time_series_df
 
     def calculate_return_time_series(self, days: int = 1) -> None:
         self.return_time_series_df = self.price_time_series_df - self.price_time_series_df.shift(days)
 
-    def get_return_time_series(self):
+    def get_return_time_series(self) -> pd.DataFrame:
         return self.return_time_series_df
 
     def calculate_mean_return(self) -> None:
