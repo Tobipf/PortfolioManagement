@@ -21,7 +21,8 @@ class Asset:
         return self.price_time_series_df
 
     def calculate_return_time_series(self, days: int = 1) -> None:
-        self.return_time_series_df = self.price_time_series_df - self.price_time_series_df.shift(days)
+        _shifted_returns = self.price_time_series_df.shift(days)
+        self.return_time_series_df = (self.price_time_series_df - _shifted_returns) / _shifted_returns
 
     def get_return_time_series(self) -> pd.DataFrame:
         return self.return_time_series_df
