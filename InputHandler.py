@@ -61,5 +61,9 @@ class InputHandler:
         return data_close_df
 
     @staticmethod
-    def clean_price_time_series(price_time_series_df: pd.DataFrame) -> pd.DataFrame:
-        return price_time_series_df.interpolate(method='time')
+    def fill_missing_values_in_price_time_series(price_time_series_df: pd.DataFrame) -> pd.DataFrame:
+        price_time_series_df.ffill(axis=0, inplace=True, limit=5)
+        price_time_series_df.bfill(axis=0, inplace=True, limit=5)
+        price_time_series_df = price_time_series_df.interpolate(method='time')
+        return price_time_series_df
+
