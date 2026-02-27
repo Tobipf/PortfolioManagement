@@ -1,0 +1,6 @@
+pandas
+pathlib
+fredapi
+yfinance
+numpy
+datetime
